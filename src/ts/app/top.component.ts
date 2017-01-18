@@ -12,7 +12,7 @@ import {Component} from "@angular/core";
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="#">Project name</a>
+    <a class="navbar-brand" href="/">{{appTitle}}</a>
   </div>
   <div id="navbar" class="navbar-collapse collapse">
     <ul class="nav navbar-nav navbar-right">
@@ -21,14 +21,17 @@ import {Component} from "@angular/core";
       <li><a href="#">Profile</a></li>
       <li><a href="#">Help</a></li>
     </ul>
-    <form class="navbar-form navbar-right">
-      <input type="text" class="form-control" placeholder="Search...">
-    </form>
   </div>
 </div>
 </nav>
 `
 })
 export class TopNavComponent {
+
+    public appTitle: string;
+
+    public constructor() {
+        this.appTitle = "Score Keeper";
+    }
 
 }
