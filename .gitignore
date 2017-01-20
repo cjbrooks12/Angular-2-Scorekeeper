@@ -4,3 +4,4 @@ env.*.json
 /node_modules
 /dist
 .DS_Store
+/src/ts/generated

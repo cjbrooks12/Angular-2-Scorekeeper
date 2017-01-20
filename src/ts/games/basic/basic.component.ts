@@ -1,9 +1,10 @@
-import {Component} from "@angular/core";
-import {GameComponent} from "../../base/users.component";
+import {Component, ViewContainerRef} from "@angular/core";
+import {GameComponent} from "../../base/game.component";
 import {DbService} from "../../db.service";
 import {GameService} from "../../game.service";
 
-import {BasicGamesheet, BasicUser} from "./basicGame";
+import {BasicGamesheet, BasicUser} from "./basic.game";
+import {DialogsService} from "../../base/dialogs";
 
 @Component({
     selector: "basic-game",
@@ -16,8 +17,13 @@ export class BasicGameComponent extends GameComponent {
     defaultScore: number;
     newButtonValue: any;
 
-    public constructor(dbService: DbService, protected gameService: GameService) {
-        super(dbService, gameService);
+    public constructor(
+        protected dbService: DbService,
+        protected gameService: GameService,
+        protected dialogsService: DialogsService,
+        protected viewContainerRef: ViewContainerRef) {
+
+        super(dbService, gameService, dialogsService, viewContainerRef);
         this.newButtonValue = {
             value: 0
         };
@@ -32,13 +38,16 @@ export class BasicGameComponent extends GameComponent {
     }
 
     public onUserLoaded(user: any) {
-        if(!user.basicGame) {
+        if (user.basicGame) {
+            user.basicGame = new BasicGamesheet(user.basicGame);
+        }
+        else {
             user.basicGame = new BasicGamesheet();
         }
     }
 
     public onUserReset(user: any) {
-        user.basicGame = new BasicGamesheet(this.defaultScore);
+        user.basicGame = new BasicGamesheet({score: this.defaultScore});
     }
 
     public addScore(user: BasicUser, value: number) {
@@ -49,6 +58,6 @@ export class BasicGameComponent extends GameComponent {
     public addButtonvalue() {
         this.buttonValues.push(this.newButtonValue);
 
-        this.newButtonValue = { value: 0 };
+        this.newButtonValue = {value: 0};
     }
 }

@@ -30,7 +30,7 @@ gulp.task('ts', ['app:env'], function () {
 //       }))
 //       .pipe(tslint.report())
 // });
-//
+
 gulp.task('app:env', function () {
   return gulp.src('./gulp/resources/env.ts')
       .pipe(gulpTemplate({

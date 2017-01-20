@@ -1,0 +1,51 @@
+<h1>Ticket To Ride</h1>
+
+<md-tab-group>
+    <md-tab label="Gamesheet">
+        <md-list>
+            <md-card *ngFor="let user of users">
+                <md-card-content style="text-align: center;">
+                    <div style="font-size: 22px;">{{user.name}}</div>
+                    <h1 style="font-size: 45px;">{{user.ttrGame.score}}</h1>
+                </md-card-content>
+                <md-card-content style="text-align: center;">
+                    <div *ngFor="let buttonValue of buttonValues | orderBy : 'value'"
+                         style="display: inline-block; text-align: center;">
+                        <div>
+                            <button md-fab (click)="addScore(user, buttonValue.value)">{{buttonValue.name}}</button>
+                        </div>
+                    </div>
+
+                    <div style="display: inline-block; text-align: center;">
+                        <div>
+                            <button md-fab (click)="addBonusPoints(user)">Bonus</button>
+                        </div>
+                    </div>
+                </md-card-content>
+                <md-card-actions>
+                    <button md-button (click)="removeUser(user)">Edit</button>
+                    <button md-button (click)="removeUser(user)">Remove</button>
+                </md-card-actions>
+            </md-card>
+            <md-card>
+                <md-input-container>
+                    <input md-input type="text" placeholder="New User's Name" name="username"
+                           [(ngModel)]="newUser.name">
+                </md-input-container>
+                <br>
+                <button md-raised-button color="primary" (click)="addUser()">Add User</button>
+            </md-card>
+        </md-list>
+    </md-tab>
+    <md-tab label="Settings">
+        <h3>Autosaving</h3>
+        <button md-raised-button color="primary" (click)="toggleAutosave()" *ngIf="autosave">Autosave On</button>
+        <button md-raised-button color="primary" (click)="toggleAutosave()" *ngIf="!autosave">Autosave Off</button>
+
+        <br><br><br>
+
+        <h3>New Game</h3>
+        <br>
+        <button md-raised-button color="primary" (click)="resetScores()">Reset Scores</button>
+    </md-tab>
+</md-tab-group>

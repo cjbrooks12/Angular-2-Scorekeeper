@@ -6,7 +6,8 @@ gulp.task('clean', function(done) {
   var finishedCount = 0;
 
   var bundles = [
-    del(config.dest + "/**/*", {force:true}, delFinished)
+    del(config.dest + "/**/*", {force:true}, delFinished),
+    del(config.js.src + '/generated', {force:true}, delFinished)
   ];
 
   function delFinished() {

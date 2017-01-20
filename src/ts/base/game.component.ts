@@ -1,7 +1,8 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, ViewContainerRef} from "@angular/core";
 import {DbService} from "../db.service";
 import {Observable} from 'rxjs/Rx';
 import {GameService} from "../game.service";
+import {DialogsService} from "./dialogs";
 
 @Component({
     selector: "users",
@@ -38,7 +39,12 @@ export class GameComponent implements OnInit {
     protected autosave: boolean;
     protected dirty: boolean;
 
-    public constructor(private dbService: DbService, protected gameService: GameService) {
+    public constructor(
+        protected dbService: DbService,
+        protected gameService: GameService,
+        protected dialogsService: DialogsService,
+        protected viewContainerRef: ViewContainerRef) {
+
         this.table = "users";
         this.usersDb = dbService.getInstance(this.table);
         this.newUser = new User();
@@ -137,10 +143,16 @@ export class GameComponent implements OnInit {
     }
 
     public removeUser(user) {
-        this.usersDb.remove(user).then(t => {
-            this.loadUsers();
-            console.log("Removed user: ");
-        });
+        this.dialogsService
+            .confirm('Confirm Dialog', 'Are you sure you want to do this?', this.viewContainerRef)
+            .subscribe((result) => {
+                if(result) {
+                    this.usersDb.remove(user).then(t => {
+                        this.loadUsers();
+                        console.log("Removed user: ");
+                    });
+                }
+            });
     }
 
     public saveGame() {

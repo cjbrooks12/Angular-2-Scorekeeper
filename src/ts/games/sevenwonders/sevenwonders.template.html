@@ -1,0 +1,122 @@
+<h1>7 Wonders</h1>
+
+<md-tab-group>
+    <md-tab label="Gamesheet">
+        <md-list>
+            <md-card *ngFor="let user of users">
+                <md-card-content style="text-align: center;">
+                    <div style="font-size: 22px;">{{user.name}}</div>
+                    <h1 style="font-size: 45px;">{{user.sevenWondersGame.score}}</h1>
+                </md-card-content>
+                <md-card-content style="text-align: center;">
+                    <div class="colored-input military">
+                        <md-input-container>
+                            <input
+                                    md-input
+                                    type="number"
+                                    placeholder="Military Points"
+                                    name="militaryvalue"
+                                    [(ngModel)]="user.sevenWondersGame.military"
+                                    (ngModelChange)="recalculate($event, user)"
+                                    min="0">
+                        </md-input-container>
+                    </div>
+                    <div class="colored-input coin">
+                        <md-input-container>
+                            <input
+                                    md-input
+                                    type="number"
+                                    placeholder="coin Points"
+                                    name="coinvalue"
+                                    [(ngModel)]="user.sevenWondersGame.coin"
+                                    (ngModelChange)="recalculate($event, user)"
+                                    min="0">
+                        </md-input-container>
+                    </div>
+                    <div class="colored-input wonder">
+                        <md-input-container>
+                            <input
+                                    md-input
+                                    type="number"
+                                    placeholder="Wonder Points"
+                                    name="wondervalue"
+                                    [(ngModel)]="user.sevenWondersGame.wonder"
+                                    (ngModelChange)="recalculate($event, user)"
+                                    min="0">
+                        </md-input-container>
+                    </div>
+                    <div class="colored-input civilian">
+                        <md-input-container>
+                            <input
+                                    md-input
+                                    type="number"
+                                    placeholder="civilian Points"
+                                    name="civilianvalue"
+                                    [(ngModel)]="user.sevenWondersGame.civilian"
+                                    (ngModelChange)="recalculate($event, user)"
+                                    min="0">
+                        </md-input-container>
+                    </div>
+                    <div class="colored-input commercial">
+                        <md-input-container>
+                            <input
+                                    md-input
+                                    type="number"
+                                    placeholder="commercial Points"
+                                    name="commercialvalue"
+                                    [(ngModel)]="user.sevenWondersGame.commercial"
+                                    (ngModelChange)="recalculate($event, user)"
+                                    min="0">
+                        </md-input-container>
+                    </div>
+                    <div class="colored-input guild">
+                        <md-input-container>
+                            <input
+                                    md-input
+                                    type="number"
+                                    placeholder="guild Points"
+                                    name="guildvalue"
+                                    [(ngModel)]="user.sevenWondersGame.guild"
+                                    (ngModelChange)="recalculate($event, user)"
+                                    min="0">
+                        </md-input-container>
+                    </div>
+                    <div class="colored-input science">
+                        <md-input-container>
+                            <input
+                                    md-input
+                                    type="number"
+                                    placeholder="science Points"
+                                    name="sciencevalue"
+                                    [(ngModel)]="user.sevenWondersGame.science"
+                                    (ngModelChange)="recalculate($event, user)"
+                                    min="0">
+                        </md-input-container>
+                    </div>
+                </md-card-content>
+                <md-card-actions>
+                    <button md-button (click)="removeUser(user)">Edit</button>
+                    <button md-button (click)="removeUser(user)">Remove</button>
+                </md-card-actions>
+            </md-card>
+            <md-card>
+                <md-input-container>
+                    <input md-input type="text" placeholder="New User's Name" name="username"
+                           [(ngModel)]="newUser.name">
+                </md-input-container>
+                <br>
+                <button md-raised-button color="primary" (click)="addUser()">Add User</button>
+            </md-card>
+        </md-list>
+    </md-tab>
+    <md-tab label="Settings">
+        <h3>Autosaving</h3>
+        <button md-raised-button color="primary" (click)="toggleAutosave()" *ngIf="autosave">Autosave On</button>
+        <button md-raised-button color="primary" (click)="toggleAutosave()" *ngIf="!autosave">Autosave Off</button>
+
+        <br><br><br>
+
+        <h3>New Game</h3>
+        <button md-raised-button color="primary" (click)="resetScores()">Reset Scores</button>
+    </md-tab>
+</md-tab-group>

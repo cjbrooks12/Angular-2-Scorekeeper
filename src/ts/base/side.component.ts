@@ -9,7 +9,7 @@ import {Component} from "@angular/core";
 <md-nav-list>
    <a md-list-item routerLink="basic" routerLinkActive="active">Basic</a>
    <a md-list-item routerLink="sevenwonders" routerLinkActive="active">Seven Wonders</a>
-   <a md-list-item routerLink="basic" routerLinkActive="active">Ticket To Ride</a>
+   <a md-list-item routerLink="ttr" routerLinkActive="active">Ticket To Ride</a>
    <a md-list-item routerLink="basic" routerLinkActive="active">Carcassone</a>
    <a md-list-item routerLink="basic" routerLinkActive="active">Clue</a>
 </md-nav-list>
