@@ -8,12 +8,13 @@ import {MainAppComponent} from "./base/main.component";
 import {SideNavComponent} from "./base/side.component";
 import {NotFoundComponent} from "./base/notfound.component";
 import {GameComponent} from "./base/game.component";
+
 import {BasicGameComponent} from "./games/basic/basic.component";
 import {SevenWondersGameComponent} from "./games/sevenwonders/sevenwonders.component";
 import {TicketToRideGameComponent} from "./games/ttr/ttr.component";
+import {ClueGameComponent} from "./games/clue/clue.component";
 
 import {DialogsService, ConfirmDialog, PromptDialog} from './base/dialogs';
-
 import {DbService} from "./db.service";
 import {GameService} from "./game.service";
 import {OrderBy} from "./util/orderby.pipe";
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
     {path: 'users', component: GameComponent},
     {path: 'basic', component: BasicGameComponent},
     {path: 'sevenwonders', component: SevenWondersGameComponent},
+    {path: 'clue', component: ClueGameComponent},
     {path: 'ttr', component: TicketToRideGameComponent},
     {path: '', redirectTo: '/basic', pathMatch: 'full'},
     {path: '**', component: NotFoundComponent}
@@ -49,6 +51,7 @@ const appRoutes: Routes = [
         BasicGameComponent,
         SevenWondersGameComponent,
         TicketToRideGameComponent,
+        ClueGameComponent,
 
         ConfirmDialog,
         PromptDialog,

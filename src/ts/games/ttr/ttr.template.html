@@ -2,11 +2,16 @@
 
 <md-tab-group>
     <md-tab label="Gamesheet">
+        <div class="text-right">
+            <button md-raised-button (click)="saveGame()" *ngIf="!dirty" [disabled]="true">Save Game</button>
+            <button md-raised-button color="accent" (click)="saveGame()" *ngIf="dirty">Save Game</button>
+        </div>
+
         <md-list>
             <md-card *ngFor="let user of users">
                 <md-card-content style="text-align: center;">
-                    <div style="font-size: 22px;">{{user.name}}</div>
-                    <h1 style="font-size: 45px;">{{user.ttrGame.score}}</h1>
+                    <div class="user-name">{{user.name}}</div>
+                    <h1 class="user-score">{{user.ttrGame.score}}</h1>
                 </md-card-content>
                 <md-card-content style="text-align: center;">
                     <div *ngFor="let buttonValue of buttonValues | orderBy : 'value'"
@@ -23,14 +28,13 @@
                     </div>
                 </md-card-content>
                 <md-card-actions>
-                    <button md-button (click)="removeUser(user)">Edit</button>
+                    <button md-button (click)="editUsername(user)">Edit Name</button>
                     <button md-button (click)="removeUser(user)">Remove</button>
                 </md-card-actions>
             </md-card>
             <md-card>
                 <md-input-container>
-                    <input md-input type="text" placeholder="New User's Name" name="username"
-                           [(ngModel)]="newUser.name">
+                    <input md-input type="text" placeholder="New User's Name" name="username" [(ngModel)]="newUser.name">
                 </md-input-container>
                 <br>
                 <button md-raised-button color="primary" (click)="addUser()">Add User</button>
@@ -38,14 +42,16 @@
         </md-list>
     </md-tab>
     <md-tab label="Settings">
-        <h3>Autosaving</h3>
-        <button md-raised-button color="primary" (click)="toggleAutosave()" *ngIf="autosave">Autosave On</button>
-        <button md-raised-button color="primary" (click)="toggleAutosave()" *ngIf="!autosave">Autosave Off</button>
+        <md-card>
+            <h3>Autosaving</h3>
+            <button md-raised-button color="primary" (click)="toggleAutosave()" *ngIf="autosave">Autosave On</button>
+            <button md-raised-button color="primary" (click)="toggleAutosave()" *ngIf="!autosave">Autosave Off</button>
+        </md-card>
 
-        <br><br><br>
-
-        <h3>New Game</h3>
-        <br>
-        <button md-raised-button color="primary" (click)="resetScores()">Reset Scores</button>
+        <md-card>
+            <h3>New Game</h3>
+            <br>
+            <button md-raised-button color="primary" (click)="resetScores()">Reset Scores</button>
+        </md-card>
     </md-tab>
 </md-tab-group>

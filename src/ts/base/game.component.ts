@@ -11,10 +11,10 @@ import {DialogsService} from "./dialogs";
 <md-list>
     <md-card *ngFor="let user of users">
         <md-card-header>
-            <md-card-title>{{user.name}}</md-card-title>
+            <div class="user-name">{{user.name}}</div>
         </md-card-header>
         <md-card-actions>
-            <button md-button (click)="removeUser(user)">Edit</button>
+            <button md-button (click)="editUsername(user)">Edit Name</button>
             <button md-button (click)="removeUser(user)">Remove</button>
         </md-card-actions>
     </md-card>
@@ -151,6 +151,16 @@ export class GameComponent implements OnInit {
                         this.loadUsers();
                         console.log("Removed user: ");
                     });
+                }
+            });
+    }
+
+    public editUsername(user) {
+        this.dialogsService
+            .prompt('Edit Username', `Set the new name for ${user.name}`, 'text', this.viewContainerRef)
+            .subscribe((result) => {
+                if(result) {
+                    user.name = result;
                 }
             });
     }

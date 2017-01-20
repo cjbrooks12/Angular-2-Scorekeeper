@@ -1,0 +1,55 @@
+<h1>Clue Game</h1>
+
+<md-tab-group>
+    <md-tab label="Gamesheet">
+        <div class="text-right">
+            <button md-raised-button (click)="saveGame()" *ngIf="!dirty" [disabled]="true">Save Game</button>
+            <button md-raised-button color="accent" (click)="saveGame()" *ngIf="dirty">Save Game</button>
+        </div>
+
+        <md-list>
+            <md-card>
+                <md-card-content class="text-center">
+                    <table>
+                        <thead>
+                        <tr>
+                            <td></td>
+                            <td *ngFor="let user of users">{{user.name}}</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let suspect of suspects">
+                            <td>{{suspect}}</td>
+                            <td *ngFor="let user of users">
+                                <md-checkbox></md-checkbox>
+                            </td>
+                        </tr>
+                        <tr><td><hr></td></tr>
+                        <tr *ngFor="let weapon of weapons">
+                            <td>{{weapon}}</td>
+                            <td *ngFor="let user of users">
+                                <md-checkbox></md-checkbox>
+                            </td>
+                        </tr>
+                        <tr><td><hr></td></tr>
+                        <tr *ngFor="let room of rooms">
+                            <td>{{room}}</td>
+                            <td *ngFor="let user of users">
+                                <md-checkbox></md-checkbox>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </md-card-content>
+            </md-card>
+        </md-list>
+    </md-tab>
+    <md-tab label="Settings">
+        <md-card>
+            <h3>Autosaving</h3>
+            <button md-button color="primary" (click)="toggleAutosave()" *ngIf="autosave">Autosave On</button>
+            <button md-button color="primary" (click)="toggleAutosave()" *ngIf="!autosave">Autosave Off</button>
+        </md-card>
+    </md-tab>
+</md-tab-group>
