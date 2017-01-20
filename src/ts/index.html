@@ -11,12 +11,25 @@
   <script src="https://unpkg.com/systemjs@0.19.39/dist/system.src.js"></script>
   <script src="https://cdn.rawgit.com/angular/angular.io/b3c65a9/public/docs/_examples/_boilerplate/systemjs.config.web.js"></script>
 
+  <script src="https://cdn.jsdelivr.net/pouchdb/6.0.5/pouchdb.min.js"></script>
+
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="/dist/css/main.css">
+  <link rel="stylesheet" href="/dist/main.css">
+
+  <base href="/">
 
   <script>
-    System.config({ packages: { js: { app: { format: 'register', defaultExtension: 'js' }}}});
-    System.import('js/app/main').catch(function(err){ console.error(err); });
+    System.config({
+      map: {
+        '@angular/material': 'npm:@angular/material'
+      },
+      packages: {
+        '': {
+          format: 'register', defaultExtension: 'js'
+        }
+      },
+    });
+    System.import('main').catch(function(err){ console.error(err); });
   </script>
 </head>
 <body>

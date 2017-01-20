@@ -3,12 +3,11 @@ var config = require('./../config');
 config.css = {
   src: config.src + '/sass',
   srcSet: config.src + '/sass/**/*.scss',
-  dest: config.dest + '/css',
+  dest: config.dest,
   autoprefixerConfig: {
     browsers: [
       '> 1%',
-      'last 2 versions',
-      'ie >= 8'
+      'last 2 versions'
     ],
     cascade: false
   },

@@ -14,7 +14,7 @@ gulp.task('ts:watch', ['ts'], function() {
   gulp.watch(config.js.srcSet, ['ts']);
 });
 
-gulp.task('ts', ['vet:ts'], function () {
+gulp.task('ts', ['app:env'], function () {
   return gulp.src(config.js.srcSet)
       .pipe(gulpif(config.env.dev(), sourcemaps.init()))
       .pipe(tsProject())
@@ -23,22 +23,21 @@ gulp.task('ts', ['vet:ts'], function () {
       .pipe(gulp.dest(config.js.dest));
 });
 
-
-gulp.task('vet:ts', function () {
-  return gulp.src(config.js.srcSet)
-      .pipe(tslint({
-        formatter: "verbose"
-      }))
-      .pipe(tslint.report())
-});
-
+// gulp.task('vet:ts', function () {
+//   return gulp.src(config.js.srcSet)
+//       .pipe(tslint({
+//         formatter: "verbose"
+//       }))
+//       .pipe(tslint.report())
+// });
+//
 gulp.task('app:env', function () {
   return gulp.src('./gulp/resources/env.ts')
       .pipe(gulpTemplate({
         env: config.envVar || {}
       }))
-      .pipe(gulp.dest(config.js.src + '/shared/constant'))
+      .pipe(gulp.dest(config.js.src + '/generated'))
       .on('finish', function () {
-        gutil.log(config.js.src + '/shared/constant/env.app is generated successfully');
+        gutil.log(config.js.src + '/generated/env.app is generated successfully');
       });
 });

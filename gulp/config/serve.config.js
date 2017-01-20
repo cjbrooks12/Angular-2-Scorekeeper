@@ -4,7 +4,6 @@ var superstatic = require("superstatic");
 config.serve = {
   browsersync: {
     port: 3001,
-    file: ['index.html', '**/*.js', '**/*.css'],
     injectChanges: true,
     logFileChanges: true,
     notify: true,

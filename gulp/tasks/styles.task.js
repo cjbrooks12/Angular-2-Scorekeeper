@@ -8,16 +8,25 @@ var sourcemaps   = require('gulp-sourcemaps');
 
 var config       = require('./../config');
 
-gulp.task('sass:watch', ['sass'], function() {
+gulp.task('sass:watch', ['sass', 'ng2:styles'], function() {
   gulp.watch(config.css.srcSet, ['sass']);
+  gulp.watch(config.js.src + "/**/*.scss", ['ng2:styles']);
 });
 
-gulp.task('sass', function() {
-  return gulp.src(config.css.srcSet)
+gulp.task('sass', ['ng2:styles'], function() {
+  return compileScss(config.css.srcSet, config.css.dest)
+});
+
+gulp.task('ng2:styles', function () {
+  return compileScss(config.js.src + "/**/*.scss", config.dest)
+});
+
+function compileScss(src, dest) {
+  return gulp.src(src)
       .pipe(gulpif(config.env.dev(), sourcemaps.init()))
       .pipe(sass().on('error', sass.logError))
       .pipe(gulpif(config.env.dev(), sourcemaps.write()))
       .pipe(autoprefixer(config.css.autoprefixerConfig))
       .pipe(gulpif(config.env.prod(), cleanCSS(config.css.minifyConfig)))
-      .pipe(gulp.dest(config.css.dest));
-});
+      .pipe(gulp.dest(dest));
+}
